@@ -163,13 +163,8 @@ PanelWindow {
     onRequestedWindowHeightChanged: root.reconcileWindowHeight()
     Component.onCompleted: root.retainedWindowHeight = root.requestedWindowHeight
 
-    exclusiveZone: Math.ceil(root.baseExclusiveZone * root.exclusiveZoneProgress)
-    WlrLayershell.layer: islandContainer.wallpaperPickerLayerVisible
-        || islandContainer.applicationLauncherLayerVisible
-        || islandContainer.fileShelfLayerVisible
-        || islandContainer.cyberMenuLayerVisible
-        ? WlrLayer.Overlay
-        : WlrLayer.Top
+    exclusiveZone: 0
+    WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.keyboardFocus: {
         if (islandContainer.controlCenterLayerVisible
                 || islandContainer.wallpaperPickerLayerVisible
