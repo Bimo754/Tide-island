@@ -940,6 +940,7 @@ PanelWindow {
             || islandState === "wallpaper_picker"
             || islandState === "application_launcher"
             || islandState === "file_shelf"
+            || islandState === "cyber_menu"
         readonly property bool splitShowsProgress: islandState === "split" && osdProgress >= 0
         readonly property bool splitShowsText: islandState === "split" && osdProgress < 0 && osdCustomText !== ""
         readonly property bool splitShowsIconOnly: islandState === "split" && osdProgress < 0 && osdCustomText === ""
@@ -1560,7 +1561,8 @@ PanelWindow {
 
         function showNotificationCapsule(appName, summary, body) {
             if (root.overviewVisible || islandState === "control_center"
-                    || islandState === "expanded" || islandState === "file_shelf") return;
+                    || islandState === "expanded" || islandState === "file_shelf"
+                    || islandState === "cyber_menu") return;
 
             const cleanedAppName = cleanNotificationText(appName);
             const cleanedSummary = cleanNotificationText(summary);
@@ -1668,7 +1670,8 @@ PanelWindow {
 
         function showBluetoothExpanded(device) {
             if (!device || root.overviewVisible || islandState === "control_center"
-                    || islandState === "notification" || islandState === "file_shelf")
+                    || islandState === "notification" || islandState === "file_shelf"
+                    || islandState === "cyber_menu")
                 return;
 
             cancelSideSwipeSettle();
@@ -1770,7 +1773,7 @@ PanelWindow {
         function showWorkspaceCapsule(wsId) {
             currentWs = wsId;
             if (root.autoHideSuppressesTransientReveal) return;
-            if (islandState === "control_center" || islandState === "notification") return;
+            if (islandState === "control_center" || islandState === "notification" || islandState === "cyber_menu") return;
             const animateFromSide = currentTransientOriginSide();
             clearTransientCapsule();
             sideTransientRestoreTimer.stop();
