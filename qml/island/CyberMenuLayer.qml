@@ -53,30 +53,32 @@ FocusScope {
             spacing: 14
 
             // --- Header Row ---
-            Row {
+            Item {
                 width: parent.width
                 height: 36
-                spacing: 10
 
-                // Icon & Title
-                Text {
+                Row {
+                    anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "󰅶"
-                    color: "#ffffff"
-                    font.pixelSize: 20
-                    font.family: root.iconFontFamily
-                }
+                    spacing: 10
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: "Cyber Arsenal & Telemetry"
-                    color: "#ffffff"
-                    font.pixelSize: 17
-                    font.bold: true
-                    font.family: root.heroFontFamily
-                }
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "󰅶"
+                        color: "#ffffff"
+                        font.pixelSize: 20
+                        font.family: root.iconFontFamily
+                    }
 
-                Item { width: 1; height: 1; Layout.fillWidth: true }
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "Cyber Arsenal & Telemetry"
+                        color: "#ffffff"
+                        font.pixelSize: 17
+                        font.bold: true
+                        font.family: root.heroFontFamily
+                    }
+                }
 
                 // Close Button
                 Rectangle {
@@ -85,14 +87,14 @@ FocusScope {
                     width: 28
                     height: 28
                     radius: 14
-                    color: closeArea.containsMouse ? "rgba(255, 255, 255, 0.15)" : "rgba(255, 255, 255, 0.08)"
+                    color: closeArea.containsMouse ? "#26ffffff" : "#14ffffff"
                     border.width: 1
-                    border.color: "rgba(255, 255, 255, 0.12)"
+                    border.color: "#1fffffff"
 
                     Text {
                         anchors.centerIn: parent
                         text: "✕"
-                        color: "white"
+                        color: "#ffffff"
                         font.pixelSize: 12
                     }
 
@@ -117,9 +119,9 @@ FocusScope {
                     height: parent.height
                     width: 260
                     radius: 12
-                    color: root.hasTarget ? "rgba(10, 132, 255, 0.15)" : "rgba(255, 255, 255, 0.05)"
+                    color: root.hasTarget ? "#260a84ff" : "#0dffffff"
                     border.width: 1
-                    border.color: root.hasTarget ? "rgba(10, 132, 255, 0.40)" : "rgba(255, 255, 255, 0.10)"
+                    border.color: root.hasTarget ? "#660a84ff" : "#1affffff"
 
                     Row {
                         anchors.left: parent.left
@@ -130,7 +132,7 @@ FocusScope {
                         Text {
                             anchors.verticalCenter: parent.verticalCenter
                             text: "󰓾"
-                            color: root.hasTarget ? "#0a84ff" : "rgba(255, 255, 255, 0.45)"
+                            color: root.hasTarget ? "#0a84ff" : "#73ffffff"
                             font.pixelSize: 16
                             font.family: root.iconFontFamily
                         }
@@ -141,14 +143,14 @@ FocusScope {
 
                             Text {
                                 text: "TARGET IP"
-                                color: "rgba(255, 255, 255, 0.45)"
+                                color: "#73ffffff"
                                 font.pixelSize: 9
                                 font.bold: true
                                 font.letterSpacing: 0.5
                             }
                             Text {
                                 text: root.hasTarget ? root.activeTarget : "No Target Active"
-                                color: root.hasTarget ? "#ffffff" : "rgba(255, 255, 255, 0.50)"
+                                color: root.hasTarget ? "#ffffff" : "#80ffffff"
                                 font.pixelSize: 13
                                 font.bold: root.hasTarget
                                 font.family: root.textFontFamily
@@ -165,7 +167,7 @@ FocusScope {
                         width: 58
                         height: 28
                         radius: 8
-                        color: copyTargetArea.containsMouse ? "#0a84ff" : "rgba(10, 132, 255, 0.25)"
+                        color: copyTargetArea.containsMouse ? "#0a84ff" : "#400a84ff"
 
                         Text {
                             anchors.centerIn: parent
@@ -190,9 +192,9 @@ FocusScope {
                     height: parent.height
                     width: 250
                     radius: 12
-                    color: "rgba(255, 255, 255, 0.05)"
+                    color: "#0dffffff"
                     border.width: 1
-                    border.color: targetInput.activeFocus ? "rgba(10, 132, 255, 0.6)" : "rgba(255, 255, 255, 0.12)"
+                    border.color: targetInput.activeFocus ? "#990a84ff" : "#1fffffff"
 
                     TextInput {
                         id: targetInput
@@ -212,7 +214,7 @@ FocusScope {
                             verticalAlignment: Text.AlignVCenter
                             visible: !targetInput.text && !targetInput.activeFocus
                             text: "Set Target IP..."
-                            color: "rgba(255, 255, 255, 0.35)"
+                            color: "#59ffffff"
                             font.pixelSize: 12
                         }
 
@@ -232,12 +234,12 @@ FocusScope {
                         width: 44
                         height: 28
                         radius: 8
-                        color: setTargetArea.containsMouse ? "rgba(255, 255, 255, 0.22)" : "rgba(255, 255, 255, 0.10)"
+                        color: setTargetArea.containsMouse ? "#38ffffff" : "#1affffff"
 
                         Text {
                             anchors.centerIn: parent
                             text: "Set"
-                            color: "white"
+                            color: "#ffffff"
                             font.pixelSize: 11
                             font.bold: true
                         }
@@ -264,12 +266,12 @@ FocusScope {
                         width: 32
                         height: 28
                         radius: 8
-                        color: clearTargetArea.containsMouse ? "rgba(255, 69, 58, 0.3)" : "rgba(255, 255, 255, 0.06)"
+                        color: clearTargetArea.containsMouse ? "#4dff453a" : "#0fffffff"
 
                         Text {
                             anchors.centerIn: parent
                             text: "✕"
-                            color: clearTargetArea.containsMouse ? "#ff453a" : "rgba(255, 255, 255, 0.55)"
+                            color: clearTargetArea.containsMouse ? "#ff453a" : "#8cffffff"
                             font.pixelSize: 11
                         }
 
@@ -288,9 +290,9 @@ FocusScope {
                     height: parent.height
                     width: 200
                     radius: 12
-                    color: root.vpnConnected ? "rgba(48, 209, 88, 0.15)" : "rgba(255, 255, 255, 0.05)"
+                    color: root.vpnConnected ? "#2630d158" : "#0dffffff"
                     border.width: 1
-                    border.color: root.vpnConnected ? "rgba(48, 209, 88, 0.40)" : "rgba(255, 255, 255, 0.10)"
+                    border.color: root.vpnConnected ? "#6630d158" : "#1affffff"
 
                     Row {
                         anchors.left: parent.left
@@ -301,7 +303,7 @@ FocusScope {
                         Text {
                             anchors.verticalCenter: parent.verticalCenter
                             text: "󰖂"
-                            color: root.vpnConnected ? "#30d158" : "rgba(255, 255, 255, 0.45)"
+                            color: root.vpnConnected ? "#30d158" : "#73ffffff"
                             font.pixelSize: 16
                             font.family: root.iconFontFamily
                         }
@@ -312,14 +314,14 @@ FocusScope {
 
                             Text {
                                 text: "VPN STATUS"
-                                color: "rgba(255, 255, 255, 0.45)"
+                                color: "#73ffffff"
                                 font.pixelSize: 9
                                 font.bold: true
                                 font.letterSpacing: 0.5
                             }
                             Text {
                                 text: root.vpnConnected ? root.vpnIp : "Disconnected"
-                                color: root.vpnConnected ? "#ffffff" : "rgba(255, 255, 255, 0.45)"
+                                color: root.vpnConnected ? "#ffffff" : "#73ffffff"
                                 font.pixelSize: 13
                                 font.bold: root.vpnConnected
                                 font.family: root.textFontFamily
@@ -336,7 +338,7 @@ FocusScope {
                         width: 48
                         height: 28
                         radius: 8
-                        color: copyVpnArea.containsMouse ? "#30d158" : "rgba(48, 209, 88, 0.25)"
+                        color: copyVpnArea.containsMouse ? "#30d158" : "#4030d158"
 
                         Text {
                             anchors.centerIn: parent
@@ -360,7 +362,7 @@ FocusScope {
             // --- Section Title: Automated Scans ---
             Text {
                 text: "AUTOMATED RECONNAISSANCE & SCANS"
-                color: "rgba(255, 255, 255, 0.45)"
+                color: "#73ffffff"
                 font.pixelSize: 10
                 font.bold: true
                 font.letterSpacing: 0.8
@@ -376,9 +378,9 @@ FocusScope {
                     width: (parent.width - 30) / 4
                     height: 58
                     radius: 12
-                    color: nmapFastArea.containsMouse ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.05)"
+                    color: nmapFastArea.containsMouse ? "#1fffffff" : "#0dffffff"
                     border.width: 1
-                    border.color: "rgba(255, 255, 255, 0.10)"
+                    border.color: "#1affffff"
 
                     Row {
                         anchors.centerIn: parent
@@ -398,7 +400,7 @@ FocusScope {
                             }
                             Text {
                                 text: "nmap -F -sV"
-                                color: "rgba(255, 255, 255, 0.45)"
+                                color: "#73ffffff"
                                 font.pixelSize: 10
                             }
                         }
@@ -418,9 +420,9 @@ FocusScope {
                     width: (parent.width - 30) / 4
                     height: 58
                     radius: 12
-                    color: nmapFullArea.containsMouse ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.05)"
+                    color: nmapFullArea.containsMouse ? "#1fffffff" : "#0dffffff"
                     border.width: 1
-                    border.color: "rgba(255, 255, 255, 0.10)"
+                    border.color: "#1affffff"
 
                     Row {
                         anchors.centerIn: parent
@@ -440,7 +442,7 @@ FocusScope {
                             }
                             Text {
                                 text: "nmap -p- --min-rate 1000"
-                                color: "rgba(255, 255, 255, 0.45)"
+                                color: "#73ffffff"
                                 font.pixelSize: 10
                             }
                         }
@@ -460,9 +462,9 @@ FocusScope {
                     width: (parent.width - 30) / 4
                     height: 58
                     radius: 12
-                    color: nmapVulnArea.containsMouse ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.05)"
+                    color: nmapVulnArea.containsMouse ? "#1fffffff" : "#0dffffff"
                     border.width: 1
-                    border.color: "rgba(255, 255, 255, 0.10)"
+                    border.color: "#1affffff"
 
                     Row {
                         anchors.centerIn: parent
@@ -482,7 +484,7 @@ FocusScope {
                             }
                             Text {
                                 text: "--script vuln"
-                                color: "rgba(255, 255, 255, 0.45)"
+                                color: "#73ffffff"
                                 font.pixelSize: 10
                             }
                         }
@@ -502,9 +504,9 @@ FocusScope {
                     width: (parent.width - 30) / 4
                     height: 58
                     radius: 12
-                    color: pingArea.containsMouse ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.05)"
+                    color: pingArea.containsMouse ? "#1fffffff" : "#0dffffff"
                     border.width: 1
-                    border.color: "rgba(255, 255, 255, 0.10)"
+                    border.color: "#1affffff"
 
                     Row {
                         anchors.centerIn: parent
@@ -524,7 +526,7 @@ FocusScope {
                             }
                             Text {
                                 text: "ping -c 4 <target>"
-                                color: "rgba(255, 255, 255, 0.45)"
+                                color: "#73ffffff"
                                 font.pixelSize: 10
                             }
                         }
@@ -547,7 +549,7 @@ FocusScope {
             // --- Section Title: Tool Launchers ---
             Text {
                 text: "SECURITY SUITE LAUNCHERS"
-                color: "rgba(255, 255, 255, 0.45)"
+                color: "#73ffffff"
                 font.pixelSize: 10
                 font.bold: true
                 font.letterSpacing: 0.8
@@ -563,9 +565,9 @@ FocusScope {
                     width: (parent.width - 30) / 4
                     height: 48
                     radius: 10
-                    color: burpArea.containsMouse ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.05)"
+                    color: burpArea.containsMouse ? "#1fffffff" : "#0dffffff"
                     border.width: 1
-                    border.color: "rgba(255, 255, 255, 0.08)"
+                    border.color: "#14ffffff"
 
                     Row {
                         anchors.centerIn: parent
@@ -600,9 +602,9 @@ FocusScope {
                     width: (parent.width - 30) / 4
                     height: 48
                     radius: 10
-                    color: wireArea.containsMouse ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.05)"
+                    color: wireArea.containsMouse ? "#1fffffff" : "#0dffffff"
                     border.width: 1
-                    border.color: "rgba(255, 255, 255, 0.08)"
+                    border.color: "#14ffffff"
 
                     Row {
                         anchors.centerIn: parent
@@ -637,9 +639,9 @@ FocusScope {
                     width: (parent.width - 30) / 4
                     height: 48
                     radius: 10
-                    color: msfArea.containsMouse ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.05)"
+                    color: msfArea.containsMouse ? "#1fffffff" : "#0dffffff"
                     border.width: 1
-                    border.color: "rgba(255, 255, 255, 0.08)"
+                    border.color: "#14ffffff"
 
                     Row {
                         anchors.centerIn: parent
@@ -674,9 +676,9 @@ FocusScope {
                     width: (parent.width - 30) / 4
                     height: 48
                     radius: 10
-                    color: feroxArea.containsMouse ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.05)"
+                    color: feroxArea.containsMouse ? "#1fffffff" : "#0dffffff"
                     border.width: 1
-                    border.color: "rgba(255, 255, 255, 0.08)"
+                    border.color: "#14ffffff"
 
                     Row {
                         anchors.centerIn: parent

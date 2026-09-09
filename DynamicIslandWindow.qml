@@ -1925,7 +1925,7 @@ PanelWindow {
                 case "file_shelf":
                     return 1100;
                 case "cyber_menu":
-                    return 800;
+                    return 820;
                 case "expanded":
                 case "bluetooth_expanded":
                     return 410;
@@ -1954,7 +1954,7 @@ PanelWindow {
                 case "file_shelf":
                     return 260;
                 case "cyber_menu":
-                    return 320;
+                    return 360;
                 case "expanded":
                 case "bluetooth_expanded":
                     return 165;
