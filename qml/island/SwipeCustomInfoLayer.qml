@@ -119,6 +119,18 @@ Item {
                 width: implicitWidth
                 height: implicitHeight
 
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: (modelData.kind === "target" || modelData.kind === "vpn") ? Qt.PointingHandCursor : Qt.ArrowCursor
+                    onClicked: {
+                        if (modelData.kind === "target") {
+                            CyberBackend.copyTarget();
+                        } else if (modelData.kind === "vpn") {
+                            CyberBackend.copyVpn();
+                        }
+                    }
+                }
+
                 SwipeCavaBars {
                     id: cavaBars
                     visible: parent.isCava
@@ -190,7 +202,7 @@ Item {
                         anchors.verticalCenterOffset: root.iconVerticalOffset
                         visible: parent.parent.hasIcon && !parent.parent.isBattery
                         text: modelData.icon || ""
-                        color: "white"
+                        color: modelData.accentColor ? modelData.accentColor : "white"
                         font.pixelSize: root.iconPixelSize
                         font.family: root.iconFontFamily
                     }
@@ -315,7 +327,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     width: parent.boundedTextWidth
                     text: modelData.text || ""
-                    color: "white"
+                    color: modelData.accentColor ? modelData.accentColor : "white"
                     font.pixelSize: root.textPixelSize
                     font.family: root.textFontFamily
                     font.weight: Font.Bold

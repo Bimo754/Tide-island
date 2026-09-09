@@ -262,6 +262,10 @@ Scope {
         function toggleFileShelf() {
             shellRoot.forFocusedWindow((window) => window.toggleFileShelfWindow());
         }
+
+        function toggleCyberMenu() {
+            shellRoot.forFocusedWindow((window) => window.toggleCyberMenuWindow());
+        }
     }
 
     Connections {

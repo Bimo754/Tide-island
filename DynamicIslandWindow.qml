@@ -167,12 +167,14 @@ PanelWindow {
     WlrLayershell.layer: islandContainer.wallpaperPickerLayerVisible
         || islandContainer.applicationLauncherLayerVisible
         || islandContainer.fileShelfLayerVisible
+        || islandContainer.cyberMenuLayerVisible
         ? WlrLayer.Overlay
         : WlrLayer.Top
     WlrLayershell.keyboardFocus: {
         if (islandContainer.controlCenterLayerVisible
                 || islandContainer.wallpaperPickerLayerVisible
-                || islandContainer.applicationLauncherLayerVisible)
+                || islandContainer.applicationLauncherLayerVisible
+                || islandContainer.cyberMenuLayerVisible)
             return WlrKeyboardFocus.Exclusive;
         if (islandContainer.fileShelfLayerVisible)
             return WlrKeyboardFocus.OnDemand;
@@ -662,6 +664,13 @@ PanelWindow {
             islandContainer.showFileShelf(true);
     }
 
+    function toggleCyberMenuWindow() {
+        if (islandContainer.islandState === "cyber_menu")
+            islandContainer.smartRestoreState();
+        else
+            islandContainer.showCyberMenu();
+    }
+
     onOverviewVisibleChanged: {
         if (overviewVisible && monitorFocused) overviewFocusTimer.restart();
         if (overviewVisible)
@@ -864,6 +873,7 @@ PanelWindow {
             || wallpaperPickerLayerVisible
             || applicationLauncherLayerVisible
             || fileShelfLayerVisible
+            || cyberMenuLayerVisible
             || expandedPlayerKeyboardFocusRequested
             || (root.monitorFocused && (root.overviewVisible || root.connectivityPromptActive))
 
@@ -974,6 +984,7 @@ PanelWindow {
         readonly property bool wallpaperPickerLayerVisible: !root.overviewVisible && islandState === "wallpaper_picker"
         readonly property bool applicationLauncherLayerVisible: !root.overviewVisible && islandState === "application_launcher"
         readonly property bool fileShelfLayerVisible: !root.overviewVisible && islandState === "file_shelf"
+        readonly property bool cyberMenuLayerVisible: !root.overviewVisible && islandState === "cyber_menu"
         readonly property var activePlayer: mediaController.activePlayer
         readonly property string lyricsDisplayText: mediaController.displayText
         readonly property string currentTrack: mediaController.currentTrack
@@ -1724,6 +1735,15 @@ PanelWindow {
             stopAutoHideTimer();
         }
 
+        function showCyberMenu() {
+            cancelSideSwipeSettle();
+            abortSideTransientMode();
+            clearTransientCapsule();
+            islandState = "cyber_menu";
+            mainCapsule.displayedWidth = mainCapsule.baseTargetWidth;
+            stopAutoHideTimer();
+        }
+
         function closeAutoOpenedFileShelf() {
             if (islandState === "file_shelf" && !fileShelfOpenedManually)
                 smartRestoreState();
@@ -1904,6 +1924,8 @@ PanelWindow {
                 case "application_launcher":
                 case "file_shelf":
                     return 1100;
+                case "cyber_menu":
+                    return 800;
                 case "expanded":
                 case "bluetooth_expanded":
                     return 410;
@@ -1931,6 +1953,8 @@ PanelWindow {
                 case "application_launcher":
                 case "file_shelf":
                     return 260;
+                case "cyber_menu":
+                    return 320;
                 case "expanded":
                 case "bluetooth_expanded":
                     return 165;
@@ -1954,6 +1978,8 @@ PanelWindow {
                 case "application_launcher":
                 case "file_shelf":
                     return 34;
+                case "cyber_menu":
+                    return 24;
                 case "expanded":
                 case "bluetooth_expanded":
                     return 40;
@@ -2634,6 +2660,32 @@ PanelWindow {
                         dropPreviewOnly: !islandContainer.fileShelfOpenedManually
                         onCloseRequested: islandContainer.smartRestoreState()
                     }
+                }
+            }
+
+            Loader {
+                id: cyberMenuLoader
+                anchors.fill: parent
+                active: islandContainer.cyberMenuLayerVisible
+                asynchronous: false
+                visible: islandContainer.cyberMenuLayerVisible
+
+                sourceComponent: Component {
+                    CyberMenuLayer {
+                        iconFontFamily: root.iconFontFamily
+                        textFontFamily: root.textFontFamily
+                        heroFontFamily: root.heroFontFamily
+                        showCondition: islandContainer.cyberMenuLayerVisible
+                        onCloseRequested: islandContainer.smartRestoreState()
+                    }
+                }
+            }
+
+            Connections {
+                target: CyberBackend
+
+                function onFeedbackMessage(title, body) {
+                    islandContainer.showNotificationCapsule("Cyber", title, body);
                 }
             }
 

@@ -18,6 +18,8 @@ namespace {
 QVariantList defaultDynamicIslandLeftSwipeItems()
 {
     return {
+        QStringLiteral("target"),
+        QStringLiteral("vpn"),
         QStringLiteral("time"),
         QStringLiteral("date"),
         QStringLiteral("workspace"),

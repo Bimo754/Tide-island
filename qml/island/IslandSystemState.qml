@@ -38,6 +38,13 @@ Item {
     readonly property string cpuStatusIcon: "\u{F035B}"
     readonly property string ramStatusIcon: "\u{F061A}"
     readonly property string bluetoothStatusIcon: "\u{F02CB}"
+    readonly property string targetStatusIcon: "\u{F05F6}"
+    readonly property string vpnStatusIcon: "󰖂"
+
+    property string targetIp: CyberBackend.targetIp
+    property bool hasTarget: CyberBackend.hasTarget
+    property string vpnIp: CyberBackend.vpnIp
+    property bool vpnConnected: CyberBackend.vpnConnected
 
     property int batteryCapacity: SysBackend.batteryCapacity
     property bool isCharging: SysBackend.batteryStatus === "Charging" || SysBackend.batteryStatus === "Full"
@@ -83,6 +90,10 @@ Item {
     onDateTextChanged: syncCustomLeftItems()
     onCurrentTrackChanged: syncCustomLeftItems()
     onCurrentArtUrlChanged: syncCustomLeftItems()
+    onTargetIpChanged: syncCustomLeftItems()
+    onHasTargetChanged: syncCustomLeftItems()
+    onVpnIpChanged: syncCustomLeftItems()
+    onVpnConnectedChanged: syncCustomLeftItems()
     Component.onCompleted: {
         syncCustomLeftItems();
         refreshMissingValues();
@@ -117,6 +128,10 @@ Item {
             return ramStatusIcon;
         case "bluetooth":
             return bluetoothStatusIcon;
+        case "target":
+            return targetStatusIcon;
+        case "vpn":
+            return vpnStatusIcon;
         default:
             return "";
         }
@@ -255,6 +270,24 @@ Item {
                 id: itemId,
                 icon: storageStatusIcon,
                 text: currentStorageUsage >= 0 ? Math.round(currentStorageUsage) + "%" : "--%"
+            };
+        case "target":
+            return {
+                id: itemId,
+                kind: "target",
+                icon: "󰓾",
+                text: hasTarget ? targetIp : "No Target",
+                active: hasTarget,
+                accentColor: hasTarget ? "#0a84ff" : "rgba(255, 255, 255, 0.45)"
+            };
+        case "vpn":
+            return {
+                id: itemId,
+                kind: "vpn",
+                icon: "󰖂",
+                text: vpnConnected ? vpnIp : "VPN Off",
+                active: vpnConnected,
+                accentColor: vpnConnected ? "#30d158" : "rgba(255, 255, 255, 0.45)"
             };
         default:
             return null;
